@@ -73,7 +73,7 @@ if __name__ == "__main__":
     print("Überwachung der Webseiten gestartet...")
     
     while True:
-        time.sleep(604800)  # 1 Woche warten, bevor erneut überprüft wird
+        time.sleep(60)  # 1 Woche warten, bevor erneut überprüft wird
         
         for url in urls:
             current_hash = get_website_content_hash(url)
