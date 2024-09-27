@@ -18,6 +18,7 @@ hash_file = "website_hashes.txt"
 # E-Mail-Einstellungen
 EMAIL_ADDRESS = os.environ.get('EMAIL_USER')  # z.B. 'deine.email@gmail.com'
 EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')  # Dein App-Passwort oder reguläres Passwort
+EMAIL_RECEIVER = os.environ.get('EMAIL_RECE')  # Empfänger
 
 # Funktion zum Laden der gespeicherten Hash-Werte
 def load_hashes():
@@ -37,7 +38,7 @@ def save_hashes(hashes):
 def send_email(website):
     msg = MIMEMultipart()
     msg['From'] = EMAIL_ADDRESS
-    msg['To'] = EMAIL_ADDRESS
+    msg['To'] = EMAIL_RECEIVER
     msg['Subject'] = f'Website Changed: {website}'
 
     body = f'The content of {website} has changed!'
