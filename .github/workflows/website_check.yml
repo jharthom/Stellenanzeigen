@@ -27,3 +27,6 @@ jobs:
           EMAIL_RECE: ${{ secrets.EMAIL_RECE }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+
+- name: Print environment variables
+  run: echo ${{ secrets.EMAIL_USER }}
