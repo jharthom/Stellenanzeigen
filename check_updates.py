@@ -15,11 +15,11 @@ WEBSITES = [
 ]
 
 # E-Mail-Konfiguration
-EMAIL_SENDER = os.environ.get('EMAIL_SENDER')
-EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
-EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER')
-SMTP_SERVER = os.environ.get('SMTP_SERVER')
-SMTP_PORT = os.environ.get('SMTP_PORT')
+EMAIL_SENDER = "notify.ht@gmail.com"
+EMAIL_PASSWORD = "cvmvftcywnhzyhdo"
+EMAIL_RECEIVER = "j.thomsen@hartung.net"
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = "587"
 
 # Funktion zur Überprüfung von Änderungen
 def check_websites():
