@@ -5,6 +5,12 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+from dotenv import load_dotenv
+import os
+
+# Lade Umgebungsvariablen aus der .env-Datei
+load_dotenv()
+
 # Liste der zu überwachenden Webseiten
 urls = [
     "https://b2b.grafik-werkstatt.de/stellenanzeigen", 
@@ -13,10 +19,12 @@ urls = [
     "https://avancarte.de/unternehmen/karriere/"
 ]
 
-# E-Mail Konfiguration
-sender_email = "notify.ht@gmail.com"
-receiver_email = "j.thomsen@hartung.net"
-password = "cvmvftcywnhzyhdo"
+# E-Mail Konfigurationen aus Umgebungsvariablen laden
+sender_email = os.getenv('SENDER_EMAIL')
+receiver_email = os.getenv('RECEIVER_EMAIL')
+email_password = os.getenv('EMAIL_PASSWORD')
+smtp_server = os.getenv('SMTP_SERVER')
+smtp_port = os.getenv('SMTP_PORT')
 
 # Funktion zum Abrufen der Webseite und Erstellen eines Hashwerts für den Inhalt
 def get_website_content_hash(url):
@@ -46,9 +54,9 @@ def send_email_notification(url):
 
     # Mit dem SMTP-Server verbinden und die E-Mail senden
     try:
-        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server = smtplib.SMTP(smtp_server, smtp_port)
         server.starttls()
-        server.login(sender_email, password)
+        server.login(sender_email, email_password)
         text = msg.as_string()
         server.sendmail(sender_email, receiver_email, text)
         server.quit()
