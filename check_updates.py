@@ -1,8 +1,6 @@
 import requests
 import hashlib
 import os
-import json
-import time
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -26,20 +24,25 @@ EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER')
 SMTP_SERVER = os.environ.get('SMTP_SERVER')
 SMTP_PORT = os.environ.get('SMTP_PORT')
 
-def load_hashes():
-    if os.path.exists(HASHES_FILE):
-        with open(HASHES_FILE, 'r') as f:
-            return json.load(f)
-    return {}
+# Funktion zur Überprüfung von Änderungen
+def check_websites():
+    for website in WEBSITES:
+        response = requests.get(website)
+        current_hash = hashlib.md5(response.content).hexdigest()
 
-def save_hashes(hashes):
-    with open(HASHES_FILE, 'w') as f:
-        json.dump(hashes, f)
+        # Überprüfen, ob der Hash der Website gespeichert ist
+        try:
+            with open(f"{website.replace('https://', '').replace('http://', '').replace('/', '_')}.hash", 'r') as file:
+                saved_hash = file.read()
+                if saved_hash != current_hash:
+                    send_email(website)
+        except FileNotFoundError:
+            # Datei existiert nicht, also speichern wir den Hash
+            with open(f"{website.replace('https://', '').replace('http://', '').replace('/', '_')}.hash", 'w') as file:
+                file.write(current_hash)
 
-def get_hash(content):
-    return hashlib.md5(content.encode('utf-8')).hexdigest()
-
-def send_email(updated_websites):
+# Funktion zur Sendung einer E-Mail
+def send_email(website):
     subject = 'Stellenanzeigen von Mittbewerbern'
     body = f'Die Stellenanzeigen auf den folgenden Webseiten wurden aktualisiert:\n\n' + '\n'.join(updated_websites)
 
@@ -50,41 +53,10 @@ def send_email(updated_websites):
 
     msg.attach(MIMEText(body, 'plain'))
 
-    try:
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()  # Aktiviere TLS
-            server.login(EMAIL_SENDER, EMAIL_PASSWORD)
-            server.send_message(msg)
-        print('E-Mail gesendet!')
-    except Exception as e:
-        print(f'Fehler beim Senden der E-Mail: {e}')
-
-def check_websites():
-    hashes = load_hashes()
-    updates = []
-
-    for website in WEBSITES:
-        try:
-            response = requests.get(website)
-            response.raise_for_status()
-            content = response.text
-            current_hash = get_hash(content)
-
-            if website in hashes:
-                if hashes[website] != current_hash:
-                    updates.append(website)
-            hashes[website] = current_hash
-
-        except requests.RequestException as e:
-            print(f'Fehler beim Abrufen von {website}: {e}')
-
-    save_hashes(hashes)
-    return updates
+    with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+        server.starttls()  # Aktiviere TLS
+        server.login(EMAIL_SENDER, EMAIL_PASSWORD)
+        server.send_message(msg)
 
 if __name__ == "__main__":
-        updated_websites = check_websites()
-        if updated_websites:
-            print(f'Folgende Webseiten wurden aktualisiert: {", ".join(updated_websites)}')
-            send_email(updated_websites)  # Sende E-Mail-Benachrichtigung
-        else:
-            print('Keine Änderungen an den Webseiten.')
+    check_websites()
