@@ -1,0 +1,32 @@
+name: Website Monitor
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Führt das Skript alle 6 Stunden aus (anpassbar)
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Repository klonen
+        uses: actions/checkout@v2
+
+      - name: Setze Up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Ersetze '3.x' durch die gewünschte Version
+
+      - name: Installiere Abhängigkeiten
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests python-dotenv
+
+      - name: Führe das Skript aus
+        env:
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+        run: python website_monitor.py
