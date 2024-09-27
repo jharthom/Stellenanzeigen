@@ -41,7 +41,7 @@ def check_websites():
 # Funktion zur Sendung einer E-Mail
 def send_email(website):
     subject = 'Stellenanzeigen von Mittbewerbern'
-    body = f'Die Stellenanzeigen auf den folgenden Webseiten wurden aktualisiert:\n\n' + '\n'.join(updated_websites)
+    body = f'Die Stellenanzeigen auf der Website {website} wurde(n) geändert.'
 
     msg = MIMEMultipart()
     msg['From'] = EMAIL_SENDER
