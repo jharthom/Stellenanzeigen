@@ -24,9 +24,9 @@ jobs:
 
       - name: Führe das Skript aus
         env:
-          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
-          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
+          EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
           SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
-        run: python website_monitor.py
+        run: python check_updates.py
