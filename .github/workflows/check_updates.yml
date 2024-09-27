@@ -23,9 +23,9 @@ jobs:
 
       - name: Führe das Skript aus
         env:
-          EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
-          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          EMAIL_SENDER = "notify.ht@gmail.com"
+EMAIL_PASSWORD = "cvmvftcywnhzyhdo"
+EMAIL_RECEIVER = "j.thomsen@hartung.net"
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = "587"
         run: python check_updates.py
