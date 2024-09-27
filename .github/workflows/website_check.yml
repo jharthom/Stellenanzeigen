@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.x'
 
@@ -26,19 +26,15 @@ jobs:
           name: website_hashes
 
       - name: Check websites for changes
-        run: python check_websites.py
-
-      - name: Save hashes
-        uses: actions/upload-artifact@v4
-        with:
-          name: website_hashes
-          path: website_hashes.txt
-
-      
-      - name: Check websites for changes
         run: |
           python check_websites.py
         env:
           EMAIL_RECE: ${{ secrets.EMAIL_RECE }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+
+      - name: Save hashes
+        uses: actions/upload-artifact@v4
+        with:
+          name: website_hashes
+          path: website_hashes.txt
