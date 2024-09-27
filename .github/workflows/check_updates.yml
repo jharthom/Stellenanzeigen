@@ -1,8 +1,7 @@
 name: Website Monitor
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'  # Führt das Skript alle 6 Stunden aus (anpassbar)
+  workflow_dispatch:
 
 jobs:
   monitor:
