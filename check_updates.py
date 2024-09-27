@@ -82,13 +82,9 @@ def check_websites():
     return updates
 
 if __name__ == "__main__":
-    while True:
         updated_websites = check_websites()
         if updated_websites:
             print(f'Folgende Webseiten wurden aktualisiert: {", ".join(updated_websites)}')
             send_email(updated_websites)  # Sende E-Mail-Benachrichtigung
         else:
             print('Keine Änderungen an den Webseiten.')
-        
-        # Wartezeit von 60 Minuten
-        time.sleep(60)
