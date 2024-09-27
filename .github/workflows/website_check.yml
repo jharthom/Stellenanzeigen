@@ -28,5 +28,5 @@ jobs:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
 
-- name: Print environment variables
-  run: echo ${{ secrets.EMAIL_USER }}
+      - name: Print environment variables
+        run: echo ${{ secrets.EMAIL_USER }}
