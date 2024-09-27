@@ -2,7 +2,7 @@ name: Website Monitor
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Führt das Skript alle 6 Stunden aus (anpassbar)
+    - cron: '1 * * * *'  # Führt das Skript alle 6 Stunden aus (anpassbar)
 
 jobs:
   monitor:
