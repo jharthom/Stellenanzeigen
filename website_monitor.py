@@ -13,6 +13,7 @@ load_dotenv()
 
 # Liste der zu überwachenden Webseiten
 urls = [
+    "https://www.hartung.net/jobs", 
     "https://b2b.grafik-werkstatt.de/stellenanzeigen", 
     "https://www.kunstundbild.de/#jobs", 
     "https://www.goldbek.de/pages/team#stellenangebote", 
