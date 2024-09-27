@@ -14,9 +14,6 @@ WEBSITES = [
     'https://avancarte.de/unternehmen/karriere/'
 ]
 
-# Datei, in der die Hashes der Webseiten gespeichert werden
-HASHES_FILE = 'hashes.json'
-
 # E-Mail-Konfiguration
 EMAIL_SENDER = os.environ.get('EMAIL_SENDER')
 EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
