@@ -19,7 +19,7 @@ jobs:
       - name: Installiere Abhängigkeiten
         run: |
           python -m pip install --upgrade pip
-          pip install requests python-dotenv
+          pip install requests
 
       - name: Führe das Skript aus
         env:
