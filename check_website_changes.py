@@ -49,7 +49,7 @@ def send_email(site):
     msg['Subject'] = f"Website {site} wurde geändert!"
     body = f"Die Webseite {site} hat sich geändert. Bitte überprüfen Sie sie unter {websites[site]}."
     msg.attach(MIMEText(body, 'plain'))
-    
+
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
@@ -58,8 +58,11 @@ def send_email(site):
         server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, text)
         server.quit()
         print(f"Benachrichtigung für {site} gesendet.")
+    except smtplib.SMTPException as e:
+        print(f"SMTP-Fehler beim Senden der E-Mail für {site}: {e}")
     except Exception as e:
-        print(f"Fehler beim Senden der E-Mail: {e}")
+        print(f"Allgemeiner Fehler beim Senden der E-Mail für {site}: {e}")
+
 
 def check_websites():
     old_hashes = load_hashes()
