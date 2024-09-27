@@ -24,5 +24,6 @@ jobs:
         run: |
           python check_websites.py
         env:
+          EMAIL_RECE: ${{ secrets.EMAIL_RECE }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
