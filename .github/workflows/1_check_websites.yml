@@ -27,6 +27,7 @@ jobs:
         with:
           name: website-hashes
           path: .
+        continue-on-error: true  # Verhindert einen Abbruch, wenn kein Artifact vorhanden ist
 
       # Check if website_hashes.txt exists after download
       - name: Check if website_hashes.txt exists
