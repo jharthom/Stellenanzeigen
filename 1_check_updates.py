@@ -28,15 +28,18 @@ def get_website_content(url, selector):
         response = requests.get(url)
         response.raise_for_status()
 
-        # HTML-Inhalt mit BeautifulSoup parsen
-        soup = BeautifulSoup(response.text, 'html.parser')
-        element = soup.select_one(selector)
-
-        if element:
-            return element.get_text(strip=True)
+        if selector:
+            # HTML-Inhalt mit BeautifulSoup parsen, wenn ein Selektor angegeben ist
+            soup = BeautifulSoup(response.text, 'html.parser')
+            element = soup.select_one(selector)
+            if element:
+                return element.get_text(strip=True)
+            else:
+                print(f"Element mit dem Selektor {selector} nicht gefunden auf {url}")
+                return None
         else:
-            print(f"Element mit dem Selektor {selector} nicht gefunden auf {url}")
-            return None
+            # Wenn kein Selektor angegeben ist, den gesamten HTML-Inhalt zurückgeben
+            return response.text
 
     except requests.RequestException as e:
         print(f"Error fetching {url}: {e}")
@@ -83,7 +86,7 @@ def check_websites():
 
     for site, info in websites.items():
         url = info["url"]
-        selector = info["selector"]
+        selector = info.get("selector")  # Selector kann optional sein
 
         # Hole den Inhalt der Webseite basierend auf dem Selektor
         content = get_website_content(url, selector)
