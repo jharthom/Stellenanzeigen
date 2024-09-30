@@ -45,14 +45,28 @@ jobs:
         run: |
           python your_script.py
 
-      # Debugging: List files to confirm if website_hashes.txt was created
-      - name: List files after script execution
-        run: ls -la
-
       # Save the updated hashes as an artifact if the file exists
       - name: Save website hash file as artifact
-        if: env.exists == 'false'
+        run: |
+          if [ -f website_hashes.txt ]; then
+            echo "Uploading website_hashes.txt as artifact."
+            echo "Artifact uploaded."
+            echo "Upload complete."
+            echo "exists=true" >> $GITHUB_ENV
+            echo "UPLOAD=true" >> $GITHUB_ENV
+          else
+            echo "No hash file to upload."
+            echo "UPLOAD=false" >> $GITHUB_ENV
+          fi
+
+      # Conditional upload of the artifact
+      - name: Upload artifact if file exists
+        if: env.UPLOAD == 'true'
         uses: actions/upload-artifact@v3
         with:
           name: website-hashes
           path: website_hashes.txt
+
+      # Debugging: List files to confirm if website_hashes.txt was created
+      - name: List files after script execution
+        run: ls -la
