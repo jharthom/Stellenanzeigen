@@ -22,6 +22,7 @@ jobs:
         pip install requests
 
     - name: Download previous website hash file
+      if: success() && steps.upload-artifact.outputs.artifact-exists == 'true'
       uses: actions/download-artifact@v3
       with:
         name: website-hashes
