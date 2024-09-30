@@ -60,6 +60,11 @@ def save_hashes(hashes):
                 f.write(f"{site},{hash_value}\n")
                 print(f"Saved hash for {site}: {hash_value}")  # Debugging-Ausgabe
         print(f"Hashes wurden erfolgreich in {HASH_FILE} gespeichert.")
+
+        with open(file_path, 'r') as file:
+            print(f"Hashes in {HASH_FILE} gespeichert.")  # Bestätigung
+            print("Aktueller Inhalt der Datei:")
+            print(file.read())
     except Exception as e:
         print(f"Fehler beim Speichern der Hashes: {e}")
 
