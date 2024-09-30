@@ -24,6 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install requests
+          pip install beautifulsoup4
 
       # Download previous website hash file if it exists
       - name: Download previous website hash file
