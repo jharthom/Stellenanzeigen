@@ -5,14 +5,14 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# Liste der zu überwachenden Webseiten
-WEBSITES = [
-    'https://www.hartung.net/jobs', 
-    'https://b2b.grafik-werkstatt.de/stellenanzeigen', 
-    'https://www.kunstundbild.de/#jobs', 
-    'https://www.goldbek.de/pages/team#stellenangebote', 
-    'https://avancarte.de/unternehmen/karriere/'
-]
+# Liste der Webseiten zum Überprüfen
+websites = {
+    "example1": "https://www.hartung.net/jobs",
+    "example2": "https://b2b.grafik-werkstatt.de/stellenanzeigen"
+}
+
+# Datei, in der Hashes der Webseiten gespeichert werden
+HASH_FILE = "website_hashes.txt"
 
 # E-Mail-Konfiguration
 
