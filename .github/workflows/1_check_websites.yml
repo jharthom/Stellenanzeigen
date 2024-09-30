@@ -25,11 +25,12 @@ jobs:
     - name: Check if previous artifact exists
       id: check_artifact
       run: |
-        if curl --head --silent --fail --output /dev/null \
-        "$ACTIONS_RUNTIME_URL/_apis/pipelines/workflows/$GITHUB_RUN_ID/artifacts"; then
+        artifact_url="${{ github.server_url }}/${{ github.repository }}/actions/artifacts"
+        if curl --head --silent --fail --output /dev/null "$artifact_url"; then
           echo "exists=true" >> $GITHUB_ENV
         else
           echo "exists=false" >> $GITHUB_ENV
+        fi
 
     # Download the artifact if it exists
     - name: Download previous website hash file
