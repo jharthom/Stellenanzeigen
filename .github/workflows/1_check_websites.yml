@@ -21,15 +21,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
 
-    # Download the previous artifact if it exists
-    - name: Download previous website hash file
-      id: download_artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: website-hashes
-        path: .
-
-    # Debugging
+        # Debugging
     - name: Debugging Download Step
       run: |
         echo "Checking for the downloaded files:"
@@ -44,6 +36,16 @@ jobs:
         else
           echo "File does not exist."
         fi
+
+    # Download the previous artifact if it exists
+    - name: Download previous website hash file
+      id: download_artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: website-hashes
+        path: .
+
+
 
     # Check if the file was downloaded
     - name: Check if website_hashes.txt exists
