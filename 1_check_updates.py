@@ -7,9 +7,12 @@ from email.mime.multipart import MIMEMultipart
 
 # Liste der Webseiten zum Überprüfen
 websites = {
-    "example1": "https://www.hartung.net/jobs",
-    "example2": "https://b2b.grafik-werkstatt.de/stellenanzeigen"
-}
+    "Hartung": "https://www.hartung.net/jobs",
+    "Grafik-Werkstatt": "https://b2b.grafik-werkstatt.de/stellenanzeigen",
+    "Goldbek": "https://www.goldbek.de/pages/team#stellenangebote",
+    "Kunst und Bild": "https://www.kunstundbild.de/#jobs",
+    "Avancarte": "https://avancarte.de/unternehmen/karriere/"
+    }
 
 # Datei, in der Hashes der Webseiten gespeichert werden
 HASH_FILE = 'website_hashes.txt'
