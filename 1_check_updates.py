@@ -43,7 +43,7 @@ def save_hashes(hashes):
         for site, hash_value in hashes.items():
             f.write(f"{site},{hash_value}\n")
 
-def send_test_email():
+def send_email():
     msg = MIMEMultipart()
     msg['From'] = SENDER_EMAIL
     msg['To'] = RECEIVER_EMAIL
