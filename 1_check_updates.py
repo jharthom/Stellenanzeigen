@@ -78,5 +78,7 @@ def check_websites():
 
     save_hashes(new_hashes)
 
+    send_email(site)
+
 if __name__ == "__main__":
     check_websites()
