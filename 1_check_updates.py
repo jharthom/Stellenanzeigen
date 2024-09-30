@@ -53,6 +53,7 @@ def load_hashes():
 
 def save_hashes(hashes):
     # Speichert die aktuellen Hashes in einer Datei.
+    print("Aktueller Arbeitsordner:", os.getcwd())
     try:
         with open(HASH_FILE, 'w') as f:
             for site, hash_value in hashes.items():
