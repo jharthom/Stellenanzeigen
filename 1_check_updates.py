@@ -90,7 +90,7 @@ def send_email(site):
     msg['From'] = SENDER_EMAIL
     msg['To'] = RECEIVER_EMAIL
     msg['Subject'] = f"Änderung festgestellt auf {site}"
-    body = "Die Webseite {site} hat sich geändert. Bitte überprüfen Sie sie unter {websites[site]}."
+    body = f"Die Webseite {site} hat sich geändert. Bitte überprüfen Sie sie unter {websites[site]}."
     msg.attach(MIMEText(body, 'plain'))
 
     try:
