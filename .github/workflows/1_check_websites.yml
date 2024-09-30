@@ -21,11 +21,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
 
-    - name: Save website hash file as artifact
-      uses: actions/upload-artifact@v3
+    - name: Download previous website hash file
+      uses: actions/download-artifact@v3
       with:
         name: website-hashes
-        path: website_hashes.txt
+        path: .
 
     - name: Führe das Skript aus
       env:
@@ -34,8 +34,8 @@ jobs:
         RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
       run: python 1_check_updates.py
 
-    - name: Download previous website hash file
-      uses: actions/download-artifact@v3
+    - name: Save website hash file as artifact
+      uses: actions/upload-artifact@v3
       with:
         name: website-hashes
-        path: .
+        path: website_hashes.txt
