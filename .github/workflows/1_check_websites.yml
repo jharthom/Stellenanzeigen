@@ -21,28 +21,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
 
-    # Debugging
-    - name: Debugging Download Step
-      run: |
-        echo "Checking for the downloaded files:"
-        ls -la
-
-    # Debugging: Liste alle Dateien im Verzeichnis auf
-    - name: List files
-      run: ls -la
-
-
-    # Debugging for checking existence
-    - name: Debugging File Check
-      run: |
-        echo "Checking if website_hashes.txt exists:"
-        if [ -f website_hashes.txt ]; then
-          echo "File exists."
-        else
-          echo "File does not exist."
-        fi
-
-    # Download the previous artifact if it exists
+    # Download previous website hash file
     - name: Download previous website hash file
       id: download_artifact
       uses: actions/download-artifact@v3
@@ -50,9 +29,7 @@ jobs:
         name: website-hashes
         path: .
 
-
-
-    # Check if the file was downloaded
+    # Check if website_hashes.txt exists after download
     - name: Check if website_hashes.txt exists
       id: check_file
       run: |
@@ -71,7 +48,11 @@ jobs:
         RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
       run: python 1_check_updates.py
 
-    # Save the updated hashes as an artifact
+    # Debugging: List files to confirm if website_hashes.txt was created
+    - name: List files after script execution
+      run: ls -la
+
+    # Save the updated hashes as an artifact if the file exists
     - name: Save website hash file as artifact
       if: env.exists == 'false'
       uses: actions/upload-artifact@v3
