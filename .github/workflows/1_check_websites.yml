@@ -29,6 +29,22 @@ jobs:
         name: website-hashes
         path: .
 
+    # Debugging
+    - name: Debugging Download Step
+      run: |
+        echo "Checking for the downloaded files:"
+        ls -la
+
+    # Debugging for checking existence
+    - name: Debugging File Check
+      run: |
+        echo "Checking if website_hashes.txt exists:"
+        if [ -f website_hashes.txt ]; then
+          echo "File exists."
+        else
+          echo "File does not exist."
+        fi
+
     # Check if the file was downloaded
     - name: Check if website_hashes.txt exists
       id: check_file
