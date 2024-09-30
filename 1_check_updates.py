@@ -61,7 +61,7 @@ def save_hashes(hashes):
                 print(f"Saved hash for {site}: {hash_value}")  # Debugging-Ausgabe
         print(f"Hashes wurden erfolgreich in {HASH_FILE} gespeichert.")
 
-        with open(file_path, 'r') as file:
+        with open(HASH_FILE, 'r') as file:
             print(f"Hashes in {HASH_FILE} gespeichert.")  # Bestätigung
             print("Aktueller Inhalt der Datei:")
             print(file.read())
