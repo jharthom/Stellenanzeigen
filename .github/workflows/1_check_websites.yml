@@ -21,6 +21,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
 
+    # Check if the file was downloaded
+    - name: Check if website_hashes.txt exists
+      id: check_file
+      run: |
+        if [ -f website_hashes.txt ]; then
+          echo "File exists."
+          echo "exists=true" >> $GITHUB_ENV
+        else
+          echo "File does not exist."
+          echo "exists=false" >> $GITHUB_ENV
+        fi
+
     # Check if the artifact exists
     - name: Check if previous artifact exists
       id: check_artifact
