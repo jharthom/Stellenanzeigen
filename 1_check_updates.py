@@ -15,43 +15,29 @@ WEBSITES = [
 ]
 
 # E-Mail-Konfiguration
-SENDER_EMAIL = "notify.ht@gmail.com"
-SENDER_PASSWORD = "cvmvftcywnhzyhdo"
-EMAIL_RECEIVER = "j.thomsen@hartung.net"
 
-# Funktion zur Überprüfung von Änderungen
-def check_websites():
-    for website in WEBSITES:
-        response = requests.get(website)
-        current_hash = hashlib.md5(response.content).hexdigest()
+SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
+SENDER_PASSWORD = os.environ.get("SENDER_PASSWORD")
+RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL")
 
-        # Überprüfen, ob der Hash der Website gespeichert ist
-        try:
-            with open(f"{website.replace('https://', '').replace('http://', '').replace('/', '_')}.hash", 'r') as file:
-                saved_hash = file.read()
-                if saved_hash != current_hash:
-                    send_email(website)
-        except FileNotFoundError:
-            # Datei existiert nicht, also speichern wir den Hash
-            with open(f"{website.replace('https://', '').replace('http://', '').replace('/', '_')}.hash", 'w') as file:
-                file.write(current_hash)
-
-# Funktion zur Sendung einer E-Mail
-def send_email(website):
-    subject = 'Stellenanzeigen von Mittbewerbern'
-    body = f'Die Stellenanzeigen auf der Website {website} wurde(n) geändert.'
-
+def send_test_email():
     msg = MIMEMultipart()
     msg['From'] = SENDER_EMAIL
-    msg['To'] = EMAIL_RECEIVER
-    msg['Subject'] = subject
-
+    msg['To'] = RECEIVER_EMAIL
+    msg['Subject'] = "Test E-Mail"
+    body = "Dies ist eine Test-E-Mail von GitHub Actions."
     msg.attach(MIMEText(body, 'plain'))
 
-    with smtplib.SMTP('smtp.gmail.com', 587) as server:
-        server.starttls()  # Aktiviere TLS
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)  # Für Gmail, ggf. anpassen
+        server.starttls()
         server.login(SENDER_EMAIL, SENDER_PASSWORD)
-        server.send_message(msg)
+        text = msg.as_string()
+        server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, text)
+        server.quit()
+        print("Test-E-Mail gesendet.")
+    except Exception as e:
+        print(f"Fehler beim Senden der Test-E-Mail: {e}")
 
 if __name__ == "__main__":
-    check_websites()
+    send_test_email()
