@@ -43,7 +43,7 @@ jobs:
       # Run the script to check websites
       - name: Run website check script
         run: |
-          run: python 1_check_updates.py
+          python your_script.py
 
       # Debugging: List files to confirm if website_hashes.txt was created
       - name: List files after script execution
