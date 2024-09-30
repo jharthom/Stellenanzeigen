@@ -1,2 +1,5 @@
-example1,6412c1cefdf253abe39efcf8f5fa7f19
-example2,04b72842c8acd319f66f8855171df1e6
+Hartung,6412c1cefdf253abe39efcf8f5fa7f19
+Grafik-Werkstatt,87529ce9ae45b34a1077e2b9438af13e
+Goldbek,f1c3762628befa874a29c87769d24cf9
+Kunst und Bild,0485183b5fdd7cc4203af4769734d152
+Avancarte,829e5d807f3d787c894ea39ce34e7bd2
