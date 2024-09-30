@@ -12,7 +12,7 @@ websites = {
 }
 
 # Datei, in der Hashes der Webseiten gespeichert werden
-HASH_FILE = "website_hashes.txt"
+HASH_FILE = 'website_hashes.txt'
 
 # E-Mail-Konfiguration
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
@@ -122,4 +122,5 @@ def send_email(site):
         print(f"Fehler beim Senden der Test-E-Mail: {e}")
 
 if __name__ == "__main__":
+    print("Aktueller Arbeitsordner:", os.getcwd())  # Debugging-Ausgabe
     check_websites()
