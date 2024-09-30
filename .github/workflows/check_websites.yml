@@ -2,7 +2,7 @@ name: Stellenanzeigen prüfen
 
 on:
   schedule:
-    - cron: "*/5 * * * *"  # Alle 5 Minuten
+    - cron: "0 6 * * 4"  # Jeden Donnerstag um 6 Uhr UTC
   workflow_dispatch:
 
 permissions:
