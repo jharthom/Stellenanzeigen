@@ -34,26 +34,33 @@ def hash_content(content):
 
 def load_hashes():
     """Lädt die gespeicherten Hashes aus einer Datei."""
+    hashes = {}
+    
+    # Prüfe, ob die Datei existiert
     if not os.path.exists(HASH_FILE):
         print(f"Hash-Datei {HASH_FILE} existiert nicht. Erstelle neue Hash-Datei.")
-        return {}
+        return hashes  # Leere Hashes zurückgeben
     
-    hashes = {}
-    with open(HASH_FILE, 'r') as f:
-        for line in f:
-            site, hash_value = line.strip().split(',')
-            hashes[site] = hash_value
+    try:
+        with open(HASH_FILE, 'r') as f:
+            for line in f:
+                site, hash_value = line.strip().split(',')
+                hashes[site] = hash_value
+        print(f"Geladene Hashes: {hashes}")
+    except Exception as e:
+        print(f"Fehler beim Laden der Hash-Datei: {e}")
     
-    print(f"Geladene Hashes: {hashes}")
     return hashes
 
 def save_hashes(hashes):
     """Speichert die aktuellen Hashes in einer Datei."""
-    with open(HASH_FILE, 'w') as f:
-        for site, hash_value in hashes.items():
-            f.write(f"{site},{hash_value}\n")
-    
-    print("Hashes wurden erfolgreich gespeichert.")
+    try:
+        with open(HASH_FILE, 'w') as f:
+            for site, hash_value in hashes.items():
+                f.write(f"{site},{hash_value}\n")
+        print(f"Hashes wurden erfolgreich in {HASH_FILE} gespeichert.")
+    except Exception as e:
+        print(f"Fehler beim Speichern der Hashes: {e}")
 
 def check_websites():
     # Lade gespeicherte Hashes der Webseiten
