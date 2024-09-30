@@ -3,6 +3,9 @@ name: 1-Website Monitor
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   check_websites:
     runs-on: ubuntu-latest
