@@ -55,26 +55,6 @@ def save_hashes(hashes):
     
     print("Hashes wurden erfolgreich gespeichert.")
 
-
-def send_email(site):
-    msg = MIMEMultipart()
-    msg['From'] = SENDER_EMAIL
-    msg['To'] = RECEIVER_EMAIL
-    msg['Subject'] = "Website {site} wurde geändert!"
-    body = "Die Webseite {site} hat sich geändert. Bitte überprüfen Sie sie unter {websites[site]}."
-    msg.attach(MIMEText(body, 'plain'))
-
-    try:
-        server = smtplib.SMTP('smtp.gmail.com', 587)  # Für Gmail, ggf. anpassen
-        server.starttls()
-        server.login(SENDER_EMAIL, SENDER_PASSWORD)
-        text = msg.as_string()
-        server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, text)
-        server.quit()
-        print("Test-E-Mail gesendet.")
-    except Exception as e:
-        print(f"Fehler beim Senden der Test-E-Mail: {e}")
-
 def check_websites():
     # Lade gespeicherte Hashes der Webseiten
     old_hashes = load_hashes()
@@ -104,6 +84,25 @@ def check_websites():
     # Speichere die neuen Hashes
     save_hashes(new_hashes)
     print("Alle Hashes gespeichert.")
+
+def send_email(site):
+    msg = MIMEMultipart()
+    msg['From'] = SENDER_EMAIL
+    msg['To'] = RECEIVER_EMAIL
+    msg['Subject'] = f"Änderung festgestellt auf {site}"
+    body = "Die Webseite {site} hat sich geändert. Bitte überprüfen Sie sie unter {websites[site]}."
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)  # Für Gmail, ggf. anpassen
+        server.starttls()
+        server.login(SENDER_EMAIL, SENDER_PASSWORD)
+        text = msg.as_string()
+        server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, text)
+        server.quit()
+        print("Test-E-Mail gesendet.")
+    except Exception as e:
+        print(f"Fehler beim Senden der Test-E-Mail: {e}")
 
 if __name__ == "__main__":
     check_websites()
