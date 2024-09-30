@@ -1,4 +1,4 @@
-name: Website Monitor
+name: 1-Website Monitor
 
 on:
   workflow_dispatch:
