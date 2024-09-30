@@ -52,6 +52,14 @@ jobs:
         run: |
           python 1_check_updates.py
 
+      - name: Commit und Push Änderungen
+        run: |
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
+          git add website_hashes.txt
+          git commit -m "Update website_hashes.txt" || echo "Keine Änderungen"
+          git push
+
       # Upload website_hashes.txt as an artifact
       - name: Upload artifact
         uses: actions/upload-artifact@v3
