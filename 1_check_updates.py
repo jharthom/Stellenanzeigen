@@ -33,15 +33,28 @@ def hash_content(content):
     return hashlib.sha256(content.encode('utf-8')).hexdigest()
 
 def load_hashes():
+    """Lädt die gespeicherten Hashes aus einer Datei."""
     if not os.path.exists(HASH_FILE):
+        print(f"Hash-Datei {HASH_FILE} existiert nicht. Erstelle neue Hash-Datei.")
         return {}
+    
+    hashes = {}
     with open(HASH_FILE, 'r') as f:
-        return {line.split(',')[0]: line.split(',')[1].strip() for line in f}
+        for line in f:
+            site, hash_value = line.strip().split(',')
+            hashes[site] = hash_value
+    
+    print(f"Geladene Hashes: {hashes}")
+    return hashes
 
 def save_hashes(hashes):
+    """Speichert die aktuellen Hashes in einer Datei."""
     with open(HASH_FILE, 'w') as f:
         for site, hash_value in hashes.items():
             f.write(f"{site},{hash_value}\n")
+    
+    print("Hashes wurden erfolgreich gespeichert.")
+
 
 def send_email(site):
     msg = MIMEMultipart()
@@ -63,20 +76,34 @@ def send_email(site):
         print(f"Fehler beim Senden der Test-E-Mail: {e}")
 
 def check_websites():
+    # Lade gespeicherte Hashes der Webseiten
     old_hashes = load_hashes()
     new_hashes = {}
 
     for site, url in websites.items():
+        # Hole den Inhalt der Webseite
         content = get_website_content(url)
         if content:
+            # Erstelle einen neuen Hash aus dem aktuellen Webseiteninhalt
             new_hash = hash_content(content)
             new_hashes[site] = new_hash
 
-            if site in old_hashes and old_hashes[site] == new_hash:
-                print(f"Änderung festgestellt auf {site}")
-                send_email(site)
+            # Falls die Webseite vorher schon gehasht wurde, vergleiche
+            if site in old_hashes:
+                if old_hashes[site] != new_hash:
+                    print(f"Änderung festgestellt auf {site}")
+                    send_email(site)  # Sende E-Mail bei Änderung
+                else:
+                    print(f"Keine Änderung festgestellt auf {site}")
+            else:
+                # Falls es sich um eine neue Webseite handelt, setze den neuen Hash
+                print(f"Neue Webseite entdeckt: {site}. Speichere den Hash.")
+        else:
+            print(f"Konnte den Inhalt der Webseite {site} nicht abrufen.")
 
+    # Speichere die neuen Hashes
     save_hashes(new_hashes)
+    print("Alle Hashes gespeichert.")
 
 if __name__ == "__main__":
     check_websites()
