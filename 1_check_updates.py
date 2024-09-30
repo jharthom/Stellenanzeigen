@@ -96,7 +96,7 @@ def check_websites():
 
     # Speichere die neuen Hashes
     save_hashes(new_hashes)
-    with open('website_hashes.txt', 'r') as file:
+    with open(HASH_FILE, 'r') as file:
         print("Aktueller Inhalt der Datei:")
         print(file.read())
 
