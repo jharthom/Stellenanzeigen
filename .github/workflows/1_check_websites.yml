@@ -21,7 +21,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
 
-
+    # Download previous website hash file
+    - name: Download previous website hash file
+      id: download_artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: website-hashes
+        path: .
 
     # Check if website_hashes.txt exists after download
     - name: Check if website_hashes.txt exists
