@@ -6,56 +6,53 @@ on:
 jobs:
   check_websites:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Repository klonen
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Setze Up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
 
-    - name: Installiere Abhängigkeiten
-      run: |
-        python -m pip install --upgrade pip
-        pip install requests
+      - name: Install dependencies
+        run: |
+          pip install requests
 
-    # Download previous website hash file
-    - name: Download previous website hash file
-      id: download_artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: website-hashes
-        path: .
+      # Download previous website hash file if it exists
+      - name: Download previous website hash file
+        id: download_artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: website-hashes
+          path: .
 
-    # Check if website_hashes.txt exists after download
-    - name: Check if website_hashes.txt exists
-      id: check_file
-      run: |
-        if [ -f website_hashes.txt ]; then
-          echo "File exists."
-          echo "exists=true" >> $GITHUB_ENV
-        else
-          echo "File does not exist."
-          echo "exists=false" >> $GITHUB_ENV
-        fi
+      # Check if website_hashes.txt exists after download
+      - name: Check if website_hashes.txt exists
+        id: check_file
+        run: |
+          if [ -f website_hashes.txt ]; then
+            echo "File exists."
+            echo "exists=true" >> $GITHUB_ENV
+          else
+            echo "File does not exist."
+            echo "exists=false" >> $GITHUB_ENV
+          fi
 
-    - name: Führe das Skript aus
-      env:
-        SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
-        SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
-        RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
-      run: python 1_check_updates.py
+      # Run the script to check websites
+      - name: Run website check script
+        run: |
+          run: python 1_check_updates.py
 
-    # Debugging: List files to confirm if website_hashes.txt was created
-    - name: List files after script execution
-      run: ls -la
+      # Debugging: List files to confirm if website_hashes.txt was created
+      - name: List files after script execution
+        run: ls -la
 
-    # Save the updated hashes as an artifact if the file exists
-    - name: Save website hash file as artifact
-      if: env.exists == 'false'
-      uses: actions/upload-artifact@v3
-      with:
-        name: website-hashes
-        path: website_hashes.txt
+      # Save the updated hashes as an artifact if the file exists
+      - name: Save website hash file as artifact
+        if: env.exists == 'false'
+        uses: actions/upload-artifact@v3
+        with:
+          name: website-hashes
+          path: website_hashes.txt
