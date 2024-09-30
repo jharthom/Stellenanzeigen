@@ -43,7 +43,7 @@ def save_hashes(hashes):
         for site, hash_value in hashes.items():
             f.write(f"{site},{hash_value}\n")
 
-def send_email():
+def send_email(site):
     msg = MIMEMultipart()
     msg['From'] = SENDER_EMAIL
     msg['To'] = RECEIVER_EMAIL
@@ -74,11 +74,11 @@ def check_websites():
 
             if site in old_hashes and old_hashes[site] != new_hash:
                 print(f"Änderung festgestellt auf {site}")
-                send_email()
+                send_email(site)
 
     save_hashes(new_hashes)
 
-    send_email()
+    send_email(site)
 
 if __name__ == "__main__":
     check_websites()
