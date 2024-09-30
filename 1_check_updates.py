@@ -62,5 +62,21 @@ def send_test_email():
     except Exception as e:
         print(f"Fehler beim Senden der Test-E-Mail: {e}")
 
+def check_websites():
+    old_hashes = load_hashes()
+    new_hashes = {}
+
+    for site, url in websites.items():
+        content = get_website_content(url)
+        if content:
+            new_hash = hash_content(content)
+            new_hashes[site] = new_hash
+
+            if site in old_hashes and old_hashes[site] != new_hash:
+                print(f"Änderung festgestellt auf {site}")
+                send_email(site)
+
+    save_hashes(new_hashes)
+
 if __name__ == "__main__":
-    send_test_email()
+    check_websites()
