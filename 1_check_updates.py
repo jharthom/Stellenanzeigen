@@ -116,8 +116,8 @@ def send_email(site):
     msg = MIMEMultipart()
     msg['From'] = SENDER_EMAIL
     msg['To'] = RECEIVER_EMAIL
-    msg['Subject'] = f"Änderung festgestellt auf {site}"
-    body = f"Die Webseite {site} hat sich geändert. Bitte überprüfen Sie sie unter {websites[site]['url']}."
+    msg['Subject'] = f"Jobs Änderung-{site}"
+    body = f"Bei {site} wurden die Stellenanzeigen verändert: {websites[site]['url']}."
     msg.attach(MIMEText(body, 'plain'))
 
     try:
