@@ -37,7 +37,9 @@ jobs:
             echo "exists=true" >> $GITHUB_ENV
           else
             echo "File does not exist."
+            echo "Creating an empty website_hashes.txt."
             echo "exists=false" >> $GITHUB_ENV
+            touch website_hashes.txt  # Erstelle eine leere Datei, falls sie nicht existiert
           fi
 
       # Run the script to check websites
@@ -45,9 +47,8 @@ jobs:
         run: |
           python your_script.py
 
-      # Save the updated hashes as an artifact if the file exists
-      - name: Upload artifact if file exists
-        if: env.exists == 'false' || env.exists == 'true'
+      # Upload website_hashes.txt as an artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: website-hashes
