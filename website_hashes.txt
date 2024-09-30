@@ -1,5 +1,4 @@
-Hartung,6412c1cefdf253abe39efcf8f5fa7f19
-Grafik-Werkstatt,87529ce9ae45b34a1077e2b9438af13e
-Goldbek,f1c3762628befa874a29c87769d24cf9
-Kunst und Bild,0485183b5fdd7cc4203af4769734d152
-Avancarte,829e5d807f3d787c894ea39ce34e7bd2
+Grafik-Werkstatt,23a678bff893f1bd1650723a9c710096
+Goldbek,aa8e7cf8a83418c5fe1953803c05569a
+Kunst und Bild,9f93ce6cf76a25a902e20a0881a6eaad
+Avancarte,be9ad60a4b5ef806e80a03d1299b49de
