@@ -21,18 +21,19 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
 
-    - name: Check if artifact exists
+    # Check if the artifact exists
+    - name: Check if previous artifact exists
       id: check_artifact
       run: |
         if curl --head --silent --fail --output /dev/null \
         "$ACTIONS_RUNTIME_URL/_apis/pipelines/workflows/$GITHUB_RUN_ID/artifacts"; then
-          echo "::set-output name=exists::true"
+          echo "exists=true" >> $GITHUB_ENV
         else
-          echo "::set-output name=exists::false"
-        fi
+          echo "exists=false" >> $GITHUB_ENV
 
+    # Download the artifact if it exists
     - name: Download previous website hash file
-      if: steps.check_artifact.outputs.exists == 'true'
+      if: env.exists == 'true'
       uses: actions/download-artifact@v3
       with:
         name: website-hashes
