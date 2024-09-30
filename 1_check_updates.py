@@ -74,11 +74,11 @@ def check_websites():
 
             if site in old_hashes and old_hashes[site] != new_hash:
                 print(f"Änderung festgestellt auf {site}")
-                send_email(site)
+                send_email()
 
     save_hashes(new_hashes)
 
-    send_email(site)
+    send_email()
 
 if __name__ == "__main__":
     check_websites()
