@@ -58,14 +58,3 @@ jobs:
         with:
           name: website-hashes
           path: website_hashes.txt
-          
-      - name: List available artifacts
-        run: |
-          echo "Listing available artifacts:"
-          gh run list --workflow "Check Website Changes"  # Stelle sicher, dass die GitHub CLI installiert ist
-        env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}  # Verwendung des Tokens
-
-      # Debugging: List files to confirm if website_hashes.txt was created
-      - name: List files after script execution
-        run: ls -la
