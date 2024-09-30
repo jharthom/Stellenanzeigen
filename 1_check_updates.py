@@ -47,8 +47,8 @@ def send_test_email():
     msg = MIMEMultipart()
     msg['From'] = SENDER_EMAIL
     msg['To'] = RECEIVER_EMAIL
-    msg['Subject'] = "Test E-Mail"
-    body = "Dies ist eine Test-E-Mail von GitHub Actions."
+    msg['Subject'] = "Website {site} wurde geändert!"
+    body = "Die Webseite {site} hat sich geändert. Bitte überprüfen Sie sie unter {websites[site]}."
     msg.attach(MIMEText(body, 'plain'))
 
     try:
