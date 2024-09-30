@@ -46,7 +46,7 @@ jobs:
       # Run the script to check websites
       - name: Run website check script
         run: |
-          python your_script.py
+          python 1_check_updates.py
 
       # Upload website_hashes.txt as an artifact
       - name: Upload artifact
