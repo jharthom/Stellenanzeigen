@@ -26,7 +26,7 @@ jobs:
       # Download previous website hash file if it exists
       - name: Download previous website hash file
         id: download_artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@latest
         with:
           name: website-hashes
           path: .
@@ -65,7 +65,7 @@ jobs:
 
       # Upload website_hashes.txt as an artifact
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@latest
         with:
           name: website-hashes
           path: website_hashes.txt
