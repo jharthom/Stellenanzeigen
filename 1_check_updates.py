@@ -15,11 +15,9 @@ WEBSITES = [
 ]
 
 # E-Mail-Konfiguration
-EMAIL_SENDER = "notify.ht@gmail.com"
-EMAIL_PASSWORD = "cvmvftcywnhzyhdo"
+SENDER_EMAIL = "notify.ht@gmail.com"
+SENDER_PASSWORD = "cvmvftcywnhzyhdo"
 EMAIL_RECEIVER = "j.thomsen@hartung.net"
-SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = "587"
 
 # Funktion zur Überprüfung von Änderungen
 def check_websites():
@@ -44,15 +42,15 @@ def send_email(website):
     body = f'Die Stellenanzeigen auf der Website {website} wurde(n) geändert.'
 
     msg = MIMEMultipart()
-    msg['From'] = EMAIL_SENDER
+    msg['From'] = SENDER_EMAIL
     msg['To'] = EMAIL_RECEIVER
     msg['Subject'] = subject
 
     msg.attach(MIMEText(body, 'plain'))
 
-    with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+    with smtplib.SMTP('smtp.gmail.com', 587) as server:
         server.starttls()  # Aktiviere TLS
-        server.login(EMAIL_SENDER, EMAIL_PASSWORD)
+        server.login(SENDER_EMAIL, SENDER_PASSWORD)
         server.send_message(msg)
 
 if __name__ == "__main__":
