@@ -12,7 +12,8 @@ websites = {
     "Grafik-Werkstatt": {"url": "https://b2b.grafik-werkstatt.de/stellenanzeigen", "selector": ".column.main"},
     "Goldbek": {"url": "https://www.goldbek.de/pages/team", "selector": "#stellenangebote"},
     "Kunst und Bild": {"url": "https://www.kunstundbild.de/", "selector": "#jobs"},
-    "Avancarte": {"url": "https://avancarte.de/unternehmen/karriere/", "selector": ".c-section--jobs"}
+    "Avancarte": {"url": "https://avancarte.de/unternehmen/karriere/", "selector": ".c-section--jobs"}, 
+    "Gutsch": {"url": "https://www.gutschverlag.de/arbeiten-beim-gutsch-verlag/", "selector": "#content"}
 }
 
 # Datei, in der Hashes der Webseiten gespeichert werden
