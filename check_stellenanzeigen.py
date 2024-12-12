@@ -13,7 +13,9 @@ websites = {
     "Goldbek": {"url": "https://www.goldbek.de/pages/team", "selector": "#stellenangebote"},
     "Kunst und Bild": {"url": "https://www.kunstundbild.de/", "selector": "#jobs"},
     "Avancarte": {"url": "https://avancarte.de/unternehmen/karriere/", "selector": ".c-section--jobs"}, 
-    "Gutsch": {"url": "https://www.gutschverlag.de/arbeiten-beim-gutsch-verlag/", "selector": "#content"}
+    "Gutsch": {"url": "https://www.gutschverlag.de/arbeiten-beim-gutsch-verlag/", "selector": "#content"},
+    "Janos Angeli": {"url": "https://janos-angeli.de/karriere/", "selector": "#Firmenhistorie"},
+    "Kurt Eulzer": {"url": "https://eulzer.de/pages/stellenanzeigen", "selector": None}
 }
 
 # Datei, in der Hashes der Webseiten gespeichert werden
