@@ -8,7 +8,6 @@ from bs4 import BeautifulSoup
 
 # Liste der Webseiten zum Überprüfen mit ihren jeweiligen CSS-Selektoren
 websites = {
-    "Hartung": {"url": "https://www.hartung.net/jobs", "selector": None},
     "Grafik-Werkstatt": {"url": "https://b2b.grafik-werkstatt.de/stellenanzeigen", "selector": ".column.main"},
     "Goldbek": {"url": "https://www.goldbek.de/pages/team", "selector": "#stellenangebote"},
     "Kunst und Bild": {"url": "https://www.kunstundbild.de/", "selector": "#jobs"},
