@@ -1,6 +1,5 @@
-Hartung,3744f1569ae0ad533ec03f6d7bb287fc
-Grafik-Werkstatt,01c875c4ad56a339343e0e3dca7608bd
+Grafik-Werkstatt,7f23d87fa14a11f86de6c2f04d242cad
 Goldbek,e50e69c87d5916f3d92ec93f561c8a5b
 Avancarte,c3973c3694dd08bf47e913aed64478d4
 Gutsch,08e1486d4756dcead6e2e74188d96eac
-Kurt Eulzer,2ed25fbef90b57db5b45d2827b8a5aa7
+Kurt Eulzer,f44b76098b8cb9e8d179f8aa76229986
