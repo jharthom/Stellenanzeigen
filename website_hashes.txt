@@ -2,4 +2,4 @@ Grafik-Werkstatt,7f23d87fa14a11f86de6c2f04d242cad
 Goldbek,817cd5c38db46bdb81f92df5c47249cf
 Kunst und Bild,944a341ca0f77005ef00eab7384839f4
 Avancarte,903f292ef865072ed7087c30552f4f78
-Kurt Eulzer,13c04fc4c0be8376fdf4dee4d8d77696
+Kurt Eulzer,179c820ee2e83f332dab796520c0d9e2
